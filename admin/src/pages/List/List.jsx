@@ -8,9 +8,7 @@ const List = () => {
   const [list, setList] = useState([]);
 
   const fetchList = async () => {
-    const response = await axios.get(
-      `https://foodie-backend-stack.onrender.com/api/food/list`
-    );
+    const response = await axios.get(`${url}/api/food/list`);
     if (response.data.success) {
       setList(response.data.data);
     } else {
@@ -19,12 +17,9 @@ const List = () => {
   };
 
   const removeFood = async (foodId) => {
-    const response = await axios.post(
-      `https://foodie-backend-stack.onrender.com/api/food/remove`,
-      {
-        id: foodId,
-      }
-    );
+    const response = await axios.post(`${url}/api/food/remove`, {
+      id: foodId,
+    });
     await fetchList();
     if (response.data.success) {
       toast.success(response.data.message);

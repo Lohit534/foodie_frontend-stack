@@ -8,9 +8,7 @@ const Order = () => {
   const [orders, setOrders] = useState([]);
 
   const fetchAllOrders = async () => {
-    const response = await axios.get(
-      `https://foodie-backend-stack.onrender.com/api/order/list`
-    );
+    const response = await axios.get(`${url}/api/order/list`);
     if (response.data.success) {
       setOrders(response.data.data.reverse());
     } else {
@@ -20,13 +18,10 @@ const Order = () => {
 
   const statusHandler = async (event, orderId) => {
     console.log(event, orderId);
-    const response = await axios.post(
-      `https://foodie-backend-stack.onrender.com/api/order/status`,
-      {
-        orderId,
-        status: event.target.value,
-      }
-    );
+    const response = await axios.post(`${url}/api/order/status`, {
+      orderId,
+      status: event.target.value,
+    });
     if (response.data.success) {
       await fetchAllOrders();
     }
